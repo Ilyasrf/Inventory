@@ -1,0 +1,25 @@
+services:
+  backend:
+    build: ./back
+    container_name: makina-backend
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    volumes:
+      - backend-uploads:/app/uploads
+      - backend-db:/app/prisma
+    restart: unless-stopped
+
+  frontend:
+    build: ./front
+    container_name: makina-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  backend-uploads:
+  backend-db:
