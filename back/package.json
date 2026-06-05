@@ -1,0 +1,27 @@
+{
+  "name": "makina-inventory-backend",
+  "version": "1.0.0",
+  "description": "Makina Masters Inventory Management System - Backend API",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "db:generate": "npx prisma generate",
+    "db:migrate": "npx prisma migrate dev --name init",
+    "db:seed": "node prisma/seed.js",
+    "db:setup": "npx prisma migrate dev --name init && node prisma/seed.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.9.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.15"
+  },
+  "devDependencies": {
+    "prisma": "^6.9.0",
+    "nodemon": "^3.1.7"
+  }
+}
