@@ -64,7 +64,7 @@ router.post('/', authenticate, async (req, res) => {
     for (const staff of staffUsers) {
       await sendMail({
         to: staff.email,
-        subject: `📦 New Request from ${req.user.displayName}`,
+        subject: `New Request from ${req.user.displayName}`,
         html: newRequestEmail(request),
       });
     }
@@ -73,6 +73,24 @@ router.post('/', authenticate, async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to create request' });
+  }
+});
+
+/* ── PUT mark requests as seen (member) ── */
+router.put('/seen', authenticate, async (req, res) => {
+  try {
+    await prisma.request.updateMany({
+      where: {
+        userId: req.user.id,
+        userSeen: false,
+        status: { in: ['APPROVED', 'REJECTED'] }
+      },
+      data: { userSeen: true }
+    });
+    res.json({ success: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to mark requests as seen' });
   }
 });
 
@@ -109,14 +127,19 @@ router.put('/:id/status', authenticate, requireStaff, async (req, res) => {
 
     const updated = await prisma.request.update({
       where: { id: parseInt(req.params.id) },
-      data: { status, staffNote: staffNote || null },
+      data: { 
+        status, 
+        staffNote: staffNote || null,
+        processedBy: req.user.displayName,
+        userSeen: false,
+      },
       include: { items: { include: { item: true } }, user: true },
     });
 
     // Notify member
     await sendMail({
       to: updated.user.email,
-      subject: `🔔 Request ${status.toLowerCase()} – Makina Masters`,
+      subject: `Request ${status.toLowerCase()} – Makina Masters`,
       html: statusUpdateEmail(updated),
     });
 

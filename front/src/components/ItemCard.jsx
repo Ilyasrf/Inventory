@@ -14,7 +14,7 @@ export default function ItemCard({ item }) {
         {item.imageUrl ? (
           <img src={item.imageUrl} alt={item.name} loading="lazy" />
         ) : (
-          <span className="item-placeholder">🔧</span>
+          <span className="item-placeholder"></span>
         )}
       </div>
       <div className="item-body">

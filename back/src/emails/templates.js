@@ -37,7 +37,7 @@ function newRequestEmail(request) {
       <p>New Inventory Request</p>
     </div>
     <div class="body">
-      <h2>📦 Request from ${request.user.displayName}</h2>
+      <h2>Request from ${request.user.displayName}</h2>
       <p><strong>Project:</strong> ${request.projectName}</p>
       <p>${request.projectDescription}</p>
       <table class="items-table">
@@ -65,6 +65,7 @@ function statusUpdateEmail(request) {
     </div>
     <div class="body">
       <h2>Your request has been updated</h2>
+      ${request.processedBy ? `<p><strong>Processed by:</strong> ${request.processedBy}</p>` : ''}
       <p><strong>Project:</strong> ${request.projectName}</p>
       <p><strong>Status:</strong> <span class="${statusClass} badge">${statusLabel}</span></p>
       ${request.staffNote ? `<p><strong>Staff Note:</strong> ${request.staffNote}</p>` : ''}

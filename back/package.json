@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@prisma/client": "^6.9.0",
+    "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "express": "^4.21.0",
@@ -21,7 +22,7 @@
     "nodemailer": "^6.9.15"
   },
   "devDependencies": {
-    "prisma": "^6.9.0",
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "prisma": "^6.9.0"
   }
 }

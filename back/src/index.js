@@ -7,12 +7,15 @@ const fs = require('fs');
 const authRoutes = require('./routes/auth');
 const itemRoutes = require('./routes/items');
 const requestRoutes = require('./routes/requests');
+const adminRoutes = require('./routes/admins');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 /* ── Ensure uploads directory exists ── */
-const uploadsDir = path.join(__dirname, '..', 'uploads');
+const uploadsDir = process.env.UPLOADS_DIR 
+  ? path.resolve(process.env.UPLOADS_DIR) 
+  : path.join(__dirname, '..', 'uploads');
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 
 /* ── Middleware ── */
@@ -28,6 +31,7 @@ app.use('/uploads', express.static(uploadsDir));
 app.use('/auth', authRoutes);
 app.use('/api/items', itemRoutes);
 app.use('/api/requests', requestRoutes);
+app.use('/api/admins', adminRoutes);
 
 /* ── Health check ── */
 app.get('/health', (_req, res) => {

@@ -55,7 +55,7 @@ export default function AdminInventory() {
   return (
     <div className="page-content">
       <div className="admin-header">
-        <h1>⚙️ Inventory Management</h1>
+        <h1>Inventory Management</h1>
         <button className="btn btn-primary" onClick={openAdd}>+ Add Item</button>
       </div>
 
@@ -79,7 +79,7 @@ export default function AdminInventory() {
                     {item.imageUrl ? (
                       <img className="item-thumb" src={item.imageUrl} alt="" />
                     ) : (
-                      <div className="item-thumb-placeholder">🔧</div>
+                      <div className="item-thumb-placeholder"></div>
                     )}
                   </td>
                   <td><strong>{item.name}</strong><br/><span style={{ fontSize: 12, color: 'var(--text-dim)' }}>{item.description}</span></td>

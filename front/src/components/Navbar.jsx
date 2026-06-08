@@ -1,31 +1,56 @@
-import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useAuth } from '../App';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
+  const [notifications, setNotifications] = useState(0);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === '/my-requests') {
+      setNotifications(0);
+    } else if (user && user.role !== 'STAFF') {
+      fetch('/api/requests', { credentials: 'include' })
+        .then(r => r.json())
+        .then(data => {
+          const finished = data.filter(r => 
+            (r.status === 'APPROVED' || r.status === 'REJECTED') && !r.userSeen
+          );
+          setNotifications(finished.length);
+        })
+        .catch(console.error);
+    }
+  }, [user, location.pathname]);
+
   if (!user) return null;
+
+  const isAdmin = user.role === 'STAFF';
 
   return (
     <nav className="navbar">
       <div className="navbar-brand">
         <h1>MAKINA MASTERS</h1>
-        <span className="badge-role">{user.role}</span>
+        <span className="badge-role">{isAdmin ? 'ADMIN' : 'MEMBER'}</span>
       </div>
 
       <div className="navbar-links">
         <NavLink to="/catalog" className={({ isActive }) => isActive ? 'active' : ''}>
-          📦 Catalog
+          Catalog
         </NavLink>
-        <NavLink to="/my-requests" className={({ isActive }) => isActive ? 'active' : ''}>
-          📋 My Requests
-        </NavLink>
-        {user.role === 'STAFF' && (
+        {!isAdmin && (
+          <NavLink to="/my-requests" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
+            My Requests
+            {notifications > 0 && <span className="nav-badge">{notifications}</span>}
+          </NavLink>
+        )}
+        {isAdmin && (
           <>
             <NavLink to="/admin/dashboard" className={({ isActive }) => isActive ? 'active' : ''}>
-              🛡️ Dashboard
+              Dashboard
             </NavLink>
             <NavLink to="/admin/inventory" className={({ isActive }) => isActive ? 'active' : ''}>
-              ⚙️ Inventory
+              Inventory
             </NavLink>
           </>
         )}

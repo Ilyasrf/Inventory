@@ -43,7 +43,7 @@ export default function RequestCart() {
     <>
       {/* Floating Action Button */}
       <button className="cart-fab" onClick={() => setOpen(true)} title="View request cart">
-        🛒
+        Cart
         {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
       </button>
 
@@ -59,12 +59,10 @@ export default function RequestCart() {
 
             {success ? (
               <div className="cart-empty">
-                <div className="empty-icon">✅</div>
                 <p>Request submitted successfully!</p>
               </div>
             ) : cart.length === 0 ? (
               <div className="cart-empty">
-                <div className="empty-icon">🛒</div>
                 <p>Your cart is empty.<br />Browse the catalog and add items.</p>
               </div>
             ) : (

@@ -18,14 +18,14 @@ const items = [
   { name: 'Sound Sensor Module KY-037', description: 'Detects sound levels with analog/digital output', category: 'Sensors', totalQuantity: 5, imageUrl: '/uploads/sensors.png' },
   { name: 'ACS712 Current Sensor Module', description: 'Measures AC/DC current up to 30A', category: 'Sensors', totalQuantity: 8, imageUrl: '/uploads/sensors.png' },
   { name: 'IR Obstacle Avoidance Module', description: 'Infrared proximity sensor for obstacle avoidance', category: 'Sensors', totalQuantity: 2, imageUrl: '/uploads/sensors.png' },
-  { name: 'L3G4200D 3-Axis Gyroscope', description: 'Three-axis digital gyroscope for orientation', category: 'Sensors', totalQuantity: 5 },
+  { name: 'L3G4200D 3-Axis Gyroscope', description: 'Three-axis digital gyroscope for orientation', category: 'Sensors', totalQuantity: 5, imageUrl: '/uploads/sensors.png' },
 
   // ── Modules ──
-  { name: 'Channel Relay 5V', description: '5V relay module for switching high-power devices', category: 'Modules', totalQuantity: 4 },
-  { name: 'Camera Module 8MP', description: '8 megapixel camera module for Raspberry Pi', category: 'Modules', totalQuantity: 3 },
-  { name: 'LCD I2C Display', description: '16x2 LCD display with I2C backpack', category: 'Modules', totalQuantity: 4 },
-  { name: 'L298N Motor Driver', description: 'Dual H-bridge motor driver for DC motors', category: 'Modules', totalQuantity: 3 },
-  { name: 'RC522 RFID Module', description: 'RFID reader/writer for access control projects', category: 'Modules', totalQuantity: 1 },
+  { name: 'Channel Relay 5V', description: '5V relay module for switching high-power devices', category: 'Modules', totalQuantity: 4, imageUrl: '/uploads/modules.png' },
+  { name: 'Camera Module 8MP', description: '8 megapixel camera module for Raspberry Pi', category: 'Modules', totalQuantity: 3, imageUrl: '/uploads/modules.png' },
+  { name: 'LCD I2C Display', description: '16x2 LCD display with I2C backpack', category: 'Modules', totalQuantity: 4, imageUrl: '/uploads/modules.png' },
+  { name: 'L298N Motor Driver', description: 'Dual H-bridge motor driver for DC motors', category: 'Modules', totalQuantity: 3, imageUrl: '/uploads/modules.png' },
+  { name: 'RC522 RFID Module', description: 'RFID reader/writer for access control projects', category: 'Modules', totalQuantity: 1, imageUrl: '/uploads/modules.png' },
 
   // ── Motors ──
   { name: 'DC Motors + Wheels', description: 'DC gear motors with wheels for robot chassis', category: 'Motors', totalQuantity: 4, imageUrl: '/uploads/motors.png' },
@@ -34,16 +34,16 @@ const items = [
   { name: 'Analog Servo Motors', description: 'Standard analog servo motors for robotics', category: 'Motors', totalQuantity: 4, imageUrl: '/uploads/motors.png' },
 
   // ── Power ──
-  { name: 'Raspberry Pi Power Supply 12.5W', description: 'Official Micro-USB 5V/2.5A power supply', category: 'Power', totalQuantity: 3 },
-  { name: 'Battery Holder (18650 x2)', description: 'Holds two 18650 Li-ion batteries', category: 'Power', totalQuantity: 4 },
-  { name: 'Li-ion Batteries', description: '18650 rechargeable lithium-ion cells', category: 'Power', totalQuantity: 12 },
+  { name: 'Raspberry Pi Power Supply 12.5W', description: 'Official Micro-USB 5V/2.5A power supply', category: 'Power', totalQuantity: 3, imageUrl: '/uploads/power.png' },
+  { name: 'Battery Holder (18650 x2)', description: 'Holds two 18650 Li-ion batteries', category: 'Power', totalQuantity: 4, imageUrl: '/uploads/power.png' },
+  { name: 'Li-ion Batteries', description: '18650 rechargeable lithium-ion cells', category: 'Power', totalQuantity: 12, imageUrl: '/uploads/power.png' },
 
   // ── Accessories ──
   { name: 'BreadBoard', description: '830-point solderless breadboard for prototyping', category: 'Accessories', totalQuantity: 5, imageUrl: '/uploads/breadboard_leds.png' },
-  { name: 'Black Electrical Tape', description: 'Insulation tape for wiring', category: 'Accessories', totalQuantity: 3 },
-  { name: 'USB Type-C Cable', description: 'Type-C data/power cable', category: 'Accessories', totalQuantity: 3 },
-  { name: 'Micro USB Cable', description: 'Micro-USB data/power cable', category: 'Accessories', totalQuantity: 3 },
-  { name: 'Flux', description: 'Soldering flux for clean solder joints', category: 'Accessories', totalQuantity: 1 },
+  { name: 'Black Electrical Tape', description: 'Insulation tape for wiring', category: 'Accessories', totalQuantity: 3, imageUrl: '/uploads/cables.png' },
+  { name: 'USB Type-C Cable', description: 'Type-C data/power cable', category: 'Accessories', totalQuantity: 3, imageUrl: '/uploads/cables.png' },
+  { name: 'Micro USB Cable', description: 'Micro-USB data/power cable', category: 'Accessories', totalQuantity: 3, imageUrl: '/uploads/cables.png' },
+  { name: 'Flux', description: 'Soldering flux for clean solder joints', category: 'Accessories', totalQuantity: 1, imageUrl: '/uploads/cables.png' },
   { name: 'LED Pack (Assorted Colors)', description: '15 LEDs per color – red, green, blue, yellow, white', category: 'Accessories', totalQuantity: 75, imageUrl: '/uploads/breadboard_leds.png' },
 ];
 
