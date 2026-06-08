@@ -85,6 +85,11 @@ a:hover { color: var(--secondary-light); }
   color: var(--text); background: rgba(124,58,237,0.1);
 }
 .navbar-links a.active { color: var(--primary-light); background: rgba(124,58,237,0.15); }
+.nav-item { display: inline-flex; align-items: center; gap: 8px; }
+.nav-badge {
+  background: var(--danger); color: #fff; font-size: 11px; font-weight: 700;
+  padding: 2px 6px; border-radius: 10px; line-height: 1;
+}
 .navbar-user { display: flex; align-items: center; gap: 10px; }
 .navbar-user img { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--border-glow); }
 .navbar-user span { font-size: 14px; color: var(--text-muted); }
@@ -177,6 +182,26 @@ a:hover { color: var(--secondary-light); }
 }
 .login-card .btn-42:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,186,188,0.3); }
 .login-card .club-info { margin-top: 32px; font-size: 12px; color: var(--text-dim); }
+.login-tabs {
+  display: flex; gap: 0; margin-bottom: 24px;
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden;
+}
+.login-tab {
+  flex: 1; padding: 10px; font-size: 14px; font-weight: 600;
+  background: transparent; color: var(--text-muted); border: none;
+  cursor: pointer; transition: var(--transition); font-family: var(--font-sans);
+}
+.login-tab:hover { color: var(--text); }
+.login-tab.active {
+  background: rgba(124,58,237,0.15); color: var(--primary-light);
+}
+.login-tab-content { animation: fadeIn 0.2s ease-out; }
+.login-tab-content .form-group { margin-bottom: 14px; text-align: left; }
+.login-hint { font-size: 12px; color: var(--text-dim); margin-top: 12px; }
+.login-error {
+  font-size: 13px; color: var(--danger); margin-bottom: 12px;
+  padding: 8px 12px; background: rgba(239,68,68,0.1); border-radius: var(--radius-sm);
+}
 
 /* ══════ CATALOG ══════ */
 .catalog-header { margin-bottom: 32px; }
@@ -187,11 +212,6 @@ a:hover { color: var(--secondary-light); }
 }
 .catalog-controls .search-box {
   flex: 1; min-width: 240px; position: relative;
-}
-.catalog-controls .search-box .input { padding-left: 40px; }
-.catalog-controls .search-box .search-icon {
-  position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
-  color: var(--text-dim); font-size: 14px;
 }
 .category-filters { display: flex; gap: 6px; flex-wrap: wrap; }
 .category-filters button {

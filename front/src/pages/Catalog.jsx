@@ -30,7 +30,6 @@ export default function Catalog() {
 
       <div className="catalog-controls">
         <div className="search-box">
-          <span className="search-icon">🔍</span>
           <input
             className="input"
             placeholder="Search components..."
@@ -55,7 +54,6 @@ export default function Catalog() {
         <div className="loading"><div className="spinner" /></div>
       ) : items.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-icon">🔍</div>
           <h3>No items found</h3>
           <p>Try a different search or category.</p>
         </div>

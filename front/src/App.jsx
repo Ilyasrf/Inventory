@@ -68,7 +68,7 @@ export default function App() {
         <div className="app-layout" style={{ position: 'relative', zIndex: 1 }}>
           {user && <Navbar />}
           <Routes>
-            <Route path="/" element={loading ? <div className="loading"><div className="spinner" /></div> : user ? <Navigate to="/catalog" /> : <Login />} />
+            <Route path="/" element={loading ? <div className="loading"><div className="spinner" /></div> : user ? <Navigate to={user.role === 'STAFF' ? '/admin/dashboard' : '/catalog'} /> : <Login />} />
             <Route path="/catalog" element={<ProtectedRoute><Catalog /></ProtectedRoute>} />
             <Route path="/my-requests" element={<ProtectedRoute><MyRequests /></ProtectedRoute>} />
             <Route path="/admin/dashboard" element={<ProtectedRoute staffOnly><AdminDashboard /></ProtectedRoute>} />

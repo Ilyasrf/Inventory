@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: makina-backend
+    env: docker
+    region: fra
+    plan: free
+    rootDir: back
+    healthCheckPath: /health
+    disk:
+      name: makina-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: DATABASE_URL
+        value: file:/data/dev.db
+      - key: UPLOADS_DIR
+        value: /data/uploads
+      - key: FRONTEND_URL
+        value: https://your-vercel-domain.vercel.app # TODO: Update this after Vercel deployment
+      - key: NODE_ENV
+        value: production
+      # Note: INTRA_CLIENT_ID, INTRA_CLIENT_SECRET, INTRA_REDIRECT_URI, JWT_SECRET, SMTP_* variables must be added securely in the Render dashboard

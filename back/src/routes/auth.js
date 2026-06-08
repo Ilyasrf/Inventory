@@ -1,6 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { PrismaClient } = require('@prisma/client');
+const bcrypt = require('bcrypt');
 const { authenticate } = require('../middleware/auth');
 
 const router = express.Router();
@@ -47,15 +48,14 @@ router.get('/42/callback', async (req, res) => {
     });
     const profile = await profileRes.json();
 
-    // First user → auto-promote to STAFF (club president)
-    const userCount = await prisma.user.count();
-
+    // 42 users are always MEMBER — admin uses separate login
     const user = await prisma.user.upsert({
       where: { intraId: profile.id },
       update: {
         displayName: profile.displayname || profile.login,
         email: profile.email,
         avatar: profile.image?.link || profile.image?.versions?.medium || null,
+        role: 'MEMBER',
       },
       create: {
         intraId: profile.id,
@@ -63,7 +63,7 @@ router.get('/42/callback', async (req, res) => {
         displayName: profile.displayname || profile.login,
         email: profile.email,
         avatar: profile.image?.link || profile.image?.versions?.medium || null,
-        role: userCount === 0 ? 'STAFF' : 'MEMBER',
+        role: 'MEMBER',
       },
     });
 
@@ -82,6 +82,61 @@ router.get('/42/callback', async (req, res) => {
   } catch (error) {
     console.error('OAuth callback error:', error);
     res.redirect(`${process.env.FRONTEND_URL}/?error=oauth_failed`);
+  }
+});
+
+/* ── Admin login (name/email + password) ── */
+router.post('/admin/login', async (req, res) => {
+  try {
+    const { name, password } = req.body;
+    
+    // Support the legacy default admin credentials or DB
+    const adminName = process.env.ADMIN_NAME || 'admin';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
+    const adminEmail = process.env.SMTP_USER || 'admin@makina-masters.local';
+
+    let user = await prisma.user.findFirst({
+      where: {
+        role: 'STAFF',
+        OR: [{ login: name }, { email: name }, { displayName: name }]
+      }
+    });
+
+    if (user && user.password) {
+      // Validate with bcrypt
+      const isValid = await bcrypt.compare(password, user.password);
+      if (!isValid) return res.status(401).json({ error: 'Invalid credentials' });
+    } else if (name === adminName && password === adminPassword) {
+      // Legacy fallback for the initial setup
+      user = await prisma.user.upsert({
+        where: { login: 'admin' },
+        update: { displayName: adminName, role: 'STAFF', email: adminEmail },
+        create: {
+          intraId: 0,
+          login: 'admin',
+          displayName: adminName,
+          email: adminEmail,
+          role: 'STAFF',
+        },
+      });
+    } else {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    const token = jwt.sign({ userId: user.id, role: 'STAFF' }, JWT_SECRET, {
+      expiresIn: '7d',
+    });
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.json(user);
+  } catch (error) {
+    console.error('Admin login error:', error);
+    res.status(500).json({ error: 'Login failed' });
   }
 });
 

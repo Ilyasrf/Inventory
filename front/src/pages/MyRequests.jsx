@@ -7,7 +7,15 @@ export default function MyRequests() {
   useEffect(() => {
     fetch('/api/requests', { credentials: 'include' })
       .then((r) => r.json())
-      .then((data) => { setRequests(data); setLoading(false); })
+      .then((data) => { 
+        setRequests(data); 
+        setLoading(false);
+        // Mark as seen in the background if there are unseen requests
+        const hasUnseen = data.some(r => !r.userSeen && (r.status === 'APPROVED' || r.status === 'REJECTED'));
+        if (hasUnseen) {
+          fetch('/api/requests/seen', { method: 'PUT', credentials: 'include' }).catch(console.error);
+        }
+      })
       .catch(() => setLoading(false));
   }, []);
 
@@ -21,7 +29,6 @@ export default function MyRequests() {
 
       {requests.length === 0 ? (
         <div className="empty-state">
-          <div className="empty-icon">📋</div>
           <h3>No requests yet</h3>
           <p>Browse the catalog and submit your first request.</p>
         </div>
@@ -31,6 +38,7 @@ export default function MyRequests() {
             <div className="request-card-header">
               <h3>{req.projectName}</h3>
               <div className="request-meta">
+                {req.processedBy && <span className="badge" style={{ background: 'rgba(255,255,255,0.1)' }}>by {req.processedBy}</span>}
                 <span className={`badge badge-${req.status.toLowerCase()}`}>{req.status}</span>
                 <span>{new Date(req.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
               </div>
