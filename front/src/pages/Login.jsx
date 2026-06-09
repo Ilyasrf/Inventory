@@ -37,8 +37,7 @@ export default function Login() {
   return (
     <div className="login-page">
       <div className="login-card glass-card">
-        <img src="/logo.png" alt="Makina Masters Logo" style={{ width: '140px', marginBottom: '8px', filter: 'drop-shadow(0 0 12px rgba(124, 58, 237, 0.4))' }} />
-        <h1>MAKINA MASTERS</h1>
+        <img src="/logo.png" alt="Makina Masters Logo" style={{ width: '180px', marginBottom: '12px', filter: 'brightness(1.3) contrast(1.1) drop-shadow(0 0 18px rgba(124, 58, 237, 0.5))' }} />
         <p className="subtitle">Inventory System</p>
 
         <div className="login-tabs">
