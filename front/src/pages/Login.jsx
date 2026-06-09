@@ -37,8 +37,9 @@ export default function Login() {
   return (
     <div className="login-page">
       <div className="login-card glass-card">
+        <img src="/logo.jpg" alt="Makina Masters Logo" style={{ width: '120px', borderRadius: '50%', marginBottom: '16px' }} />
         <h1>MAKINA MASTERS</h1>
-        <p className="subtitle">Robotics · AI · IoT — Inventory System</p>
+        <p className="subtitle">Inventory System</p>
 
         <div className="login-tabs">
           <button
@@ -58,12 +59,6 @@ export default function Login() {
         {tab === 'member' ? (
           <div className="login-tab-content">
             <a href={`${backendUrl}/auth/42`} className="btn-42">
-              <svg width="24" height="24" viewBox="0 0 64 64" fill="none">
-                <polygon points="20,8 20,36 34,22 34,8" fill="white"/>
-                <polygon points="20,36 34,22 34,50 20,50" fill="white" opacity="0.7"/>
-                <polygon points="34,22 48,8 48,36 34,36" fill="white"/>
-                <polygon points="34,36 48,36 48,50 34,50" fill="white" opacity="0.7"/>
-              </svg>
               Login with 42 Intra
             </a>
             <p className="login-hint">Members authenticate with their 42 Intra account</p>
@@ -99,10 +94,6 @@ export default function Login() {
             <p className="login-hint">Inventory guardians only</p>
           </form>
         )}
-
-        <p className="club-info">
-          Based at 1337 MED
-        </p>
       </div>
     </div>
   );

@@ -8,29 +8,32 @@ export default function AnimatedStars() {
     const ctx = canvas.getContext('2d');
     let animId;
     let mouseX = 0, mouseY = 0;
-    const stars = [];
+    let stars = [];
     const STAR_COUNT = 220;
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 0.3,
+          speed: Math.random() * 0.3 + 0.05,
+          opacity: Math.random(),
+          twinkleSpeed: Math.random() * 0.02 + 0.005,
+          twinkleDir: Math.random() > 0.5 ? 1 : -1,
+          depth: Math.random() * 3 + 1, // parallax depth
+        });
+      }
+    }
 
     function resize() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      initStars();
     }
     resize();
     window.addEventListener('resize', resize);
-
-    // Create stars
-    for (let i = 0; i < STAR_COUNT; i++) {
-      stars.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 2 + 0.3,
-        speed: Math.random() * 0.3 + 0.05,
-        opacity: Math.random(),
-        twinkleSpeed: Math.random() * 0.02 + 0.005,
-        twinkleDir: Math.random() > 0.5 ? 1 : -1,
-        depth: Math.random() * 3 + 1, // parallax depth
-      });
-    }
 
     // Shooting stars
     const shootingStars = [];
