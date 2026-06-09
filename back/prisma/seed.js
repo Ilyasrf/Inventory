@@ -6,19 +6,18 @@ const items = [
   { name: 'ESP32 (Micro USB)', description: 'WiFi + Bluetooth microcontroller, great for IoT projects', category: 'Boards', totalQuantity: 11, imageUrl: '/uploads/esp32.png' },
   { name: 'ESP32-CAM', description: 'ESP32 with built-in camera module for vision projects', category: 'Boards', totalQuantity: 3, imageUrl: '/uploads/esp32.png' },
   { name: 'Arduino Uno', description: 'Classic ATmega328P board, ideal for beginners', category: 'Boards', totalQuantity: 7, imageUrl: '/uploads/arduino_uno.png' },
-  { name: 'Arduino Mega', description: 'More I/O pins and memory for complex projects', category: 'Boards', totalQuantity: 5, imageUrl: '/uploads/arduino_uno.png' },
+  { name: 'Arduino Mega', description: 'More I/O pins and memory for complex projects', category: 'Boards', totalQuantity: 5, imageUrl: '/uploads/arduino_mega.png' },
   { name: 'Raspberry Pi 3', description: 'Full Linux single-board computer for AI and IoT', category: 'Boards', totalQuantity: 6, imageUrl: '/uploads/raspberry_pi.png' },
 
   // ── Sensors ──
-  { name: 'HC-SR501 PIR Motion Sensor', description: 'Passive infrared motion detection', category: 'Sensors', totalQuantity: 5, imageUrl: '/uploads/sensors.png' },
+  { name: 'HC-SR501 PIR Motion Sensor', description: 'Passive infrared motion detection', category: 'Sensors', totalQuantity: 5, imageUrl: '/uploads/pir_sensor.png' },
   { name: 'DHT22 (Temp/Humidity)', description: 'Digital temperature and humidity sensor', category: 'Sensors', totalQuantity: 4, imageUrl: '/uploads/sensors.png' },
-  { name: 'MQ-135 Gas Sensor', description: 'Air quality sensor for CO2, NH3, benzene', category: 'Sensors', totalQuantity: 4, imageUrl: '/uploads/sensors.png' },
-  { name: 'IR Obstacle Sensors', description: 'Infrared obstacle detection for robotics', category: 'Sensors', totalQuantity: 6, imageUrl: '/uploads/sensors.png' },
+  { name: 'MQ-135 Gas Sensor', description: 'Air quality sensor for CO2, NH3, benzene', category: 'Sensors', totalQuantity: 4, imageUrl: '/uploads/gas_sensor.png' },
+  { name: 'IR Obstacle Avoidance Sensors', description: 'Infrared obstacle detection and avoidance for robotics', category: 'Sensors', totalQuantity: 8, imageUrl: '/uploads/ir_sensor.png' },
   { name: 'HC-SR04 Ultrasonic Distance Sensor', description: 'Measures distance using ultrasonic waves (2cm–400cm)', category: 'Sensors', totalQuantity: 9, imageUrl: '/uploads/sensors.png' },
   { name: 'Sound Sensor Module KY-037', description: 'Detects sound levels with analog/digital output', category: 'Sensors', totalQuantity: 5, imageUrl: '/uploads/sensors.png' },
   { name: 'ACS712 Current Sensor Module', description: 'Measures AC/DC current up to 30A', category: 'Sensors', totalQuantity: 8, imageUrl: '/uploads/sensors.png' },
-  { name: 'IR Obstacle Avoidance Module', description: 'Infrared proximity sensor for obstacle avoidance', category: 'Sensors', totalQuantity: 2, imageUrl: '/uploads/sensors.png' },
-  { name: 'L3G4200D 3-Axis Gyroscope', description: 'Three-axis digital gyroscope for orientation', category: 'Sensors', totalQuantity: 5, imageUrl: '/uploads/sensors.png' },
+  { name: 'L3G4200D 3-Axis Gyroscope', description: 'Three-axis digital gyroscope for orientation', category: 'Sensors', totalQuantity: 5, imageUrl: '/uploads/gyroscope.png' },
 
   // ── Modules ──
   { name: 'Channel Relay 5V', description: '5V relay module for switching high-power devices', category: 'Modules', totalQuantity: 4, imageUrl: '/uploads/modules.png' },
