@@ -25,7 +25,6 @@ export default function Catalog() {
     <div className="page-content">
       <div className="catalog-header">
         <h1>Component Catalog</h1>
-        <p>Browse available components and request what you need for your project.</p>
       </div>
 
       <div className="catalog-controls">
