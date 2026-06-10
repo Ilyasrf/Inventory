@@ -6,7 +6,6 @@ COPY package*.json ./
 RUN npm install
 
 COPY prisma ./prisma
-COPY prisma/schema.prisma ./schema-copy.prisma
 RUN npx prisma generate
 
 COPY . .
@@ -15,4 +14,4 @@ RUN mkdir -p uploads
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "cp ./schema-copy.prisma prisma/schema.prisma && npx prisma db push --accept-data-loss && node prisma/seed.js && node src/index.js"]
+CMD ["sh", "-c", "npx prisma db push --accept-data-loss && node prisma/seed.js && node src/index.js"]

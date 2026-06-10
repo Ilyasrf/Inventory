@@ -59,14 +59,18 @@ router.post('/', authenticate, async (req, res) => {
       include: { items: { include: { item: true } }, user: true },
     });
 
-    // Notify all staff via email
-    const staffUsers = await prisma.user.findMany({ where: { role: 'STAFF' } });
-    for (const staff of staffUsers) {
-      await sendMail({
-        to: staff.email,
-        subject: `New Request from ${req.user.displayName}`,
-        html: newRequestEmail(request),
-      });
+    // Notify all staff via email (non-blocking — don't fail the request if email fails)
+    try {
+      const staffUsers = await prisma.user.findMany({ where: { role: 'STAFF' } });
+      for (const staff of staffUsers) {
+        await sendMail({
+          to: staff.email,
+          subject: `New Request from ${req.user.displayName}`,
+          html: newRequestEmail(request),
+        });
+      }
+    } catch (emailErr) {
+      console.error('Email notification failed (non-fatal):', emailErr.message);
     }
 
     res.status(201).json(request);
@@ -136,12 +140,16 @@ router.put('/:id/status', authenticate, requireStaff, async (req, res) => {
       include: { items: { include: { item: true } }, user: true },
     });
 
-    // Notify member
-    await sendMail({
-      to: updated.user.email,
-      subject: `Request ${status.toLowerCase()} – Makina Masters`,
-      html: statusUpdateEmail(updated),
-    });
+    // Notify member (non-blocking — don't fail the status update if email fails)
+    try {
+      await sendMail({
+        to: updated.user.email,
+        subject: `Request ${status.toLowerCase()} – Makina Masters`,
+        html: statusUpdateEmail(updated),
+      });
+    } catch (emailErr) {
+      console.error('Email notification failed (non-fatal):', emailErr.message);
+    }
 
     res.json(updated);
   } catch (err) {
