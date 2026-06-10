@@ -6,17 +6,11 @@ services:
     plan: free
     rootDir: back
     healthCheckPath: /health
-    disk:
-      name: makina-data
-      mountPath: /data
-      sizeGB: 1
     envVars:
       - key: PORT
         value: 3001
       - key: DATABASE_URL
-        value: file:/data/dev.db
-      - key: UPLOADS_DIR
-        value: /data/uploads
+        value: postgres://user:pass@host/dbname # TODO: Update this with your actual PostgreSQL URL in the Render dashboard
       - key: FRONTEND_URL
         value: https://your-vercel-domain.vercel.app # TODO: Update this after Vercel deployment
       - key: NODE_ENV

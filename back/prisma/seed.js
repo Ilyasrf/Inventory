@@ -46,12 +46,13 @@ const items = [
 ];
 
 async function main() {
-  console.log('🌱 Seeding Makina Masters inventory...');
+  const count = await prisma.item.count();
+  if (count > 0) {
+    console.log(`✅ Items already seeded (${count} found). Skipping seed to preserve data.`);
+    return;
+  }
 
-  // Clear existing data
-  await prisma.requestItem.deleteMany();
-  await prisma.request.deleteMany();
-  await prisma.item.deleteMany();
+  console.log('🌱 Seeding Makina Masters inventory...');
 
   for (const item of items) {
     await prisma.item.create({
